@@ -3,5 +3,16 @@
   "main": "src/server.js",
   "scripts": {
     "start": "PORT=3000 node src/server.js"
+  },
+  "name": "cluster-and-threads",
+  "version": "1.0.0",
+  "repository": "git@github.com:ruckonic/cluster-and-threads.git",
+  "author": "ruckonic <ruckonic@icloud.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^8.19.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.7.1"
   }
 }
