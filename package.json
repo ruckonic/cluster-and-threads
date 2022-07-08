@@ -1,0 +1,7 @@
+{
+  "type": "module",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "PORT=3000 node src/server.js"
+  }
+}
