@@ -1,6 +1,5 @@
 import { randomUUID } from 'node:crypto'
 import { URL } from 'node:url'
-
 import { MessageChannel, Worker } from 'node:worker_threads'
 
 /** @type {Worker[]} */
