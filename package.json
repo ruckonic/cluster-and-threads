@@ -2,8 +2,8 @@
   "type": "module",
   "main": "src/index.js",
   "scripts": {
-    "cluster": "PORT=4000 node -r ./appsignal.cjs src/cluster.js",
-    "simple": "PORT=4000 node -r ./appsignal.cjs src/simple.js",
+    "cluster": "PORT=4000 node src/cluster.js",
+    "simple": "PORT=4000 node src/simple.js",
     "bel:pbkdf2": "node src/block-event-loop/pbkdf2-sync-example.js",
     "bel:readfile": "node src/block-event-loop/readfile-sync-example.js"
   },
@@ -20,8 +20,5 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
     "prettier": "^2.7.1"
-  },
-  "dependencies": {
-    "@appsignal/nodejs": "^2.4.2"
   }
 }
