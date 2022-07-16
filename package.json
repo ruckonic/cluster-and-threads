@@ -1,18 +1,27 @@
 {
   "type": "module",
-  "main": "src/server.js",
+  "main": "src/index.js",
   "scripts": {
-    "start": "PORT=3000 node src/server.js"
+    "cluster": "PORT=4000 node -r ./appsignal.cjs src/cluster.js",
+    "simple": "PORT=3000 node -r ./appsignal.cjs src/simple.js",
+    "bel:pbkdf2": "node src/block-event-loop/pbkdf2-sync-example.js",
+    "bel:readfile": "node src/block-event-loop/readfile-sync-example.js"
   },
   "name": "cluster-and-threads",
   "version": "1.0.0",
   "repository": "git@github.com:ruckonic/cluster-and-threads.git",
   "author": "ruckonic <ruckonic@icloud.com>",
   "license": "MIT",
+  "nsolid": {
+    "command": "localhost:9001"
+  },
   "devDependencies": {
     "eslint": "^8.19.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
     "prettier": "^2.7.1"
+  },
+  "dependencies": {
+    "@appsignal/nodejs": "^2.4.2"
   }
 }
