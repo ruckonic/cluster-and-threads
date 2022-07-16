@@ -3,7 +3,7 @@
   "main": "src/index.js",
   "scripts": {
     "cluster": "PORT=4000 node -r ./appsignal.cjs src/cluster.js",
-    "simple": "PORT=3000 node -r ./appsignal.cjs src/simple.js",
+    "simple": "PORT=4000 node -r ./appsignal.cjs src/simple.js",
     "bel:pbkdf2": "node src/block-event-loop/pbkdf2-sync-example.js",
     "bel:readfile": "node src/block-event-loop/readfile-sync-example.js"
   },

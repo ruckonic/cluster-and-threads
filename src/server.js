@@ -19,10 +19,10 @@ const route = {
       }
 
       const { limit } = execObj.groups
-      const sumPrime = sumPrimeNumbers(+limit).toString()
+      const sumPrime = sumPrimeNumbers(+limit)
 
       res.writeHead(200)
-      res.write(sumPrime)
+      res.write(sumPrime.toString())
       res.end()
     },
   },
