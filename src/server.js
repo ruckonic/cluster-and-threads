@@ -1,38 +1,44 @@
-import fs from 'node:fs'
 import http from 'node:http'
-import { URL } from 'node:url'
+import { addSumJob } from './worker/worker.js'
+// import { sumPrimeNumbers } from './utils/prime-number.js'
 
-const PORT = process.env.PORT
+/**
+ * GET /:limit
+ */
+const limitRouteRegExp = /\/(?<limit>\d+$)/
+const route = {
+  [limitRouteRegExp]: {
+    /**
+     * @param {http.IncomingMessage} req
+     * @param {http.ServerResponse} res
+     */
+    async GET(req, res) {
+      const execObj = limitRouteRegExp.exec(req.url)
+      if (!execObj) {
+        res.writeHead(400)
+        return res.end()
+      }
 
-const routes = {
-  /**
-   * Print a hello world
-   * @param {http.IncomingMessage} req
-   * @param {http.ServerResponse} res
-   */
-  GET(req, res) {
-    res.writeHead(200)
-    const url = new URL('../example.txt', import.meta.url)
-    const data = fs.readFileSync(url, {
-      encoding: 'utf8',
-    })
+      const { limit } = execObj.groups
+      const sumPrime = await addSumJob(+limit)
 
-    const str = data.repeat(10).replace(/f/g, 'sds').toLowerCase()
-
-    res.write(str)
-    res.end()
+      res.writeHead(200)
+      res.write(sumPrime.toString())
+      res.end()
+    },
   },
 }
 
-const server = http.createServer((req, res) => {
-  process.stdout.write(`[${req.method}] ${req.url}\n`)
-  if (req.url === '/') {
-    return routes[req.method](req, res)
+export const server = http.createServer((req, res) => {
+  process.stdout.write(`[${req.method}] pid ${process.pid} ${req.url}\n`)
+
+  if (limitRouteRegExp.test(req.url)) {
+    route[limitRouteRegExp][req.method](req, res)
+    return
   }
 
-  return res.writeHead(404).write('Not found')
+  res.writeHead(404)
+  res.end()
 })
 
-server.listen(+PORT, 'localhost', () => {
-  console.log('Server is running on port ', PORT)
-})
+export default server
