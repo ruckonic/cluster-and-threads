@@ -1,5 +1,6 @@
 import http from 'node:http'
-import { sumPrimeNumbers } from './utils/prime-number.js'
+import { addSumJob } from './worker/worker.js'
+// import { sumPrimeNumbers } from './utils/prime-number.js'
 
 /**
  * GET /:limit
@@ -11,7 +12,7 @@ const route = {
      * @param {http.IncomingMessage} req
      * @param {http.ServerResponse} res
      */
-    GET(req, res) {
+    async GET(req, res) {
       const execObj = limitRouteRegExp.exec(req.url)
       if (!execObj) {
         res.writeHead(400)
@@ -19,7 +20,7 @@ const route = {
       }
 
       const { limit } = execObj.groups
-      const sumPrime = sumPrimeNumbers(+limit)
+      const sumPrime = await addSumJob(+limit)
 
       res.writeHead(200)
       res.write(sumPrime.toString())

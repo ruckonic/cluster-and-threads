@@ -6,7 +6,7 @@ import { MessageChannel, Worker } from 'node:worker_threads'
 const workerPool = []
 const url = new URL('./prime.worker.js', import.meta.url)
 
-for (let i = 0; i < 4; i++) {
+for (let i = 0; i < 6; i++) {
   workerPool.push(new Worker(url))
 }
 
